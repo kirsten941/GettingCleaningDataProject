@@ -1,0 +1,17 @@
+{
+    "contents" : "\nurl<-\"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip\"\ndestfile<-\"dataset.zip\"\ndownload.file(url, destfile)\n",
+    "created" : 1406070089998.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1390572720",
+    "id" : "EA9EA8DA",
+    "lastKnownWriteTime" : 1406071590,
+    "path" : "~/Education/GettingCleaningData/Project/run_analysis.R",
+    "project_path" : "run_analysis.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
