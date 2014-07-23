@@ -1,10 +1,10 @@
 {
-    "contents" : "\nurl<-\"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip\"\ndestfile<-\"dataset.zip\"\ndownload.file(url, destfile)\n",
+    "contents" : "\n#url<-\"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip\"\n#destfile<-\"dataset.zip\"\n#download.file(url, destfile)\n\n#read test and train data in as data.frames\ntrain<-read.table(\"./UCI HAR Dataset/train/X_train.txt\")\ntest<-read.table(\"./UCI HAR Dataset/test/X_test.txt\")\ntrain.activity<-read.table(\"./UCI HAR Dataset/train/y_train.txt\", col.names=\"activity\")\ntest.activity<-read.table(\"./UCI HAR Dataset/test/y_test.txt\", col.names=\"activity\")\ntrain.subject<-read.table(\"./UCI HAR Dataset/train/subject_train.txt\", col.names=\"subject\")\ntest.subject<-read.table(\"./UCI HAR Dataset/test/subject_test.txt\", col.names=\"subject\")\n\n#combine numeric test and train data\ndata<-rbind(test,train)\n\n#label variables in combined data (v1 -> tBodyAcc-mean()-X, etc.)\nlabels<-read.table(\"./UCI HAR Dataset/features.txt\", row.names=1, col.names=\"labels\")\ncolnames(data)<-labels$labels\n\n#add on the activity ids\ndata.activity<-rbind(test.activity,train.activity)\ndata<-cbind(data.activity,data)\n\n#add on the subject ids\ndata.subject<-rbind(test.subject,train.subject)\ndata<-cbind(data.subject,data)\n\n#subset 'mean()' and 'std()' related columns + activity + subject\ndata.tidy<-data[, c(1:2,grep(\"mean()\",names(data), fixed=TRUE),grep(\"std()\",names(data), fixed=TRUE))]\ndata.tidy$activity<-factor(data.tidy$activity,labels=c(\"Walking\",\"Walking_Upstairs\",\"Walking_downstairs\",\"Sitting\",\"Standing\",\"Laying\"))\n\n#group by subject and activity, return mean for each numeric variable in data\ndata.tidy.agg<-aggregate(data.tidy,\n                         by=list(activity=data.tidy$activity,subject=data.tidy$subject),\n                         FUN=\"mean\")\ndata.tidy.agg<-data.tidy.agg[,-c(3,4)]\n\n#write out txt file for project\ndestfile<-\"data_tidy_output.txt\"\nwrite.table(data.tidy.agg, destfile)\n",
     "created" : 1406070089998.000,
     "dirty" : true,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1390572720",
+    "hash" : "2062417174",
     "id" : "EA9EA8DA",
     "lastKnownWriteTime" : 1406071590,
     "path" : "~/Education/GettingCleaningData/Project/run_analysis.R",
